@@ -9,6 +9,7 @@ commands:
   zoomitem:
     description: Get a zoom stick!
     permission: zoomitem.use
+    usage: "/zoomitem <player name>"
 permissions:
   zoomitem.use:
     description: Allow user to use ZoomItem

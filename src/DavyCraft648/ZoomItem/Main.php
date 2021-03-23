@@ -2,7 +2,7 @@
 
 namespace DavyCraft648\ZoomItem;
 
-use pocketmine\command\{Command, CommandSender};
+use pocketmine\command\{Command, CommandSender, ConsoleCommandSender};
 use pocketmine\entity\Attribute;
 use pocketmine\event\inventory\InventoryTransactionEvent;
 use pocketmine\event\Listener;
@@ -29,23 +29,39 @@ class Main extends PluginBase implements Listener
      * @return bool
      */
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
-        if ($sender instanceof Player) {
-            $item = ItemFactory::get($this->zoomId(), $this->zoomMeta())
-                ->setCustomName(TextFormat::RESET . TextFormat::BLUE . "ZoomItem");
-            $item->getNamedTag()->setString("ZoomItem", "ZoomIn");
-            if (isset($args[0]) and $sender->hasPermission("zoomitem.give")) {
-                $target = $this->getServer()->getPlayerExact($args[0]);
-                if ($target instanceof Player) {
-                    $target->getInventory()->addItem($item);
-                    return true;
-                }
-                $sender->sendMessage(TextFormat::RED . "Player not found or try to be more specific");
-                return false;
-            }
+        $item = ItemFactory::get($this->zoomId(), $this->zoomMeta())
+            ->setCustomName(TextFormat::RESET . TextFormat::BLUE . "ZoomItem");
+        $item->getNamedTag()->setString("ZoomItem", "ZoomIn");
+        if ($sender instanceof Player and !isset($args[0])) {
             $sender->getInventory()->addItem($item);
             return true;
         }
+        if (isset($args[0]) and $sender->hasPermission("zoomitem.give")) {
+            $this->giveZoomItem($sender, $args[0]);
+            return true;
+        }
         return false;
+    }
+
+    /**
+     * Give zoom item to player
+     * @param $sender CommandSender|Player|ConsoleCommandSender
+     * @param $target string|Player
+     */
+    public function giveZoomItem($sender, $target): void {
+        $item = ItemFactory::get($this->zoomId(), $this->zoomMeta())
+            ->setCustomName(TextFormat::RESET . TextFormat::BLUE . "ZoomItem");
+        $item->getNamedTag()->setString("ZoomItem", "ZoomIn");
+        if (is_string($target)) {
+            $target = $this->getServer()->getPlayerExact($target);
+        }
+        if ($target instanceof Player) {
+            $target->getInventory()->addItem($item);
+            $target->sendMessage(TextFormat::GREEN."You got a zoom item from {$sender->getName()}");
+            $sender->sendMessage(TextFormat::GREEN."Given zoom item to {$target->getName()}");
+            return;
+        }
+        $sender->sendMessage(TextFormat::RED."Player not found or try to be more specific");
     }
 
     /**
