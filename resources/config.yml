@@ -1,0 +1,57 @@
+# ZoomItem plugin configuration file
+
+# Features
+#
+# How to activate the zoom
+# - Sneak (Sneak to zoom in, stand to zoom out) (Player must held the zoom item)
+# - Tap (Tap to zoom in, tap again to zoom out)
+#mode: Sneak
+mode: Sneak
+
+# Cancel player drop item event if the item is a zoom item
+# Player that has zoomitem.give permission will not affected
+#noDropItem: true
+noDropItem: true
+
+# Cancel player transaction to container inventory if the item is a zoom item
+# Player that has zoomitem.give permission will not affected
+#noMoveInv: false
+noMoveInv: true
+
+# Item id and meta
+# Item given when player use /zoomitem command
+#
+#itemId: 280
+#itemMeta: 0
+itemId: 280
+itemMeta: 0
+
+# Item name
+# Name changed when player use ZoomItem
+# (With quote)
+#
+# Item name when first given to player using /zoomitem
+#firstItemName: "&r&9ZoomItem"
+firstItemName: "&r&9ZoomItem"
+
+# Item name after player use the item to zooming in (Tap mode only)
+# When leave empty ("") item name will the same as "firstItemName"
+#zoomInItemName: "&r&9ZoomItem\n&7Right click to zoom out"
+zoomInItemName: "&r&9ZoomItem\n&7Right click to zoom out"
+
+# Item name after player use the item to zooming out (Tap mode only)
+# When leave empty ("") item name will the same as "firstItemName"
+#zoomOutItemName: "&r&9ZoomItem\n&7Right click to zoom in"
+zoomOutItemName: "&r&9ZoomItem\n&7Right click to zoom in"
+
+# Actionbar message
+# Message when player use ZoomItem
+# (With quote)
+#
+# Message when zooming in
+#zoomInMessage: "&aZooming In..."
+zoomInMessage: "&aZooming In..."
+
+# Message when zooming out
+#zoomOutMessage: "&aZooming Out!"
+zoomOutMessage: "&aZooming Out!"

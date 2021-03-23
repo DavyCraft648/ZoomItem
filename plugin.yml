@@ -1,0 +1,18 @@
+name: ZoomItem
+version: 0.0.1
+main: DavyCraft648\ZoomItem\Main
+api: 3.14.0
+website: https://github.com/DavyCraft648/ZoomItem
+description: Zoom like mcpe Zoom Behavior pack
+author: DavyCraft648
+commands:
+  zoomitem:
+    description: Get a zoom stick!
+    permission: zoomitem.use
+permissions:
+  zoomitem.use:
+    description: Allow user to use ZoomItem
+    default: op
+  zoomitem.give:
+    description: Allow user to give ZoomItem
+    default: op
